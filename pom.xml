@@ -21,6 +21,7 @@
 		<module>utils-serialize</module>
 		<module>utils-web-server</module>
 		<module>utils-test</module>
+		<module>utils-crypto-chameleon</module>
 	</modules>
 
 	<dependencies>
