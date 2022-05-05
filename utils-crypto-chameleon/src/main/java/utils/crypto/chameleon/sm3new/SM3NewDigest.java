@@ -1,4 +1,4 @@
-package utils.crypto.chameleon;
+package utils.crypto.chameleon.sm3new;
 
 import org.bouncycastle.crypto.digests.GeneralDigest;
 import org.bouncycastle.util.Memoable;

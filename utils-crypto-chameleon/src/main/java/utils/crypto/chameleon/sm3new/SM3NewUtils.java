@@ -1,7 +1,6 @@
-package utils.crypto.chameleon;
+package utils.crypto.chameleon.sm3new;
 
 
-import org.bouncycastle.crypto.digests.SM3Digest;
 import utils.security.Hasher;
 
 /**
