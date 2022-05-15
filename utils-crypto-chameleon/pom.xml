@@ -6,7 +6,7 @@
 
     <groupId>com.jd.utils</groupId>
     <artifactId>utils-crypto-chameleon</artifactId>
-    <version>2.2.1.RELEASE</version>
+    <version>2.2.2.RELEASE</version>
     <dependencies>
         <dependency>
             <groupId>org.bouncycastle</groupId>
@@ -21,9 +21,9 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.jd.utils</groupId>
-            <artifactId>utils-common</artifactId>
-            <version>2.2.1.RELEASE</version>
+            <groupId>com.jd.blockchain</groupId>
+            <artifactId>ledger-model</artifactId>
+            <version>1.6.3.RELEASE</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>

@@ -5,7 +5,12 @@ import org.bouncycastle.crypto.params.ECDomainParameters;
 import org.bouncycastle.jce.ECNamedCurveTable;
 import org.bouncycastle.jce.spec.ECNamedCurveParameterSpec;
 import org.bouncycastle.math.ec.ECCurve;
+import org.bouncycastle.math.ec.ECPoint;
+import org.bouncycastle.pqc.math.linearalgebra.ByteUtils;
+import utils.crypto.chameleon.sm3new.SM3NewUtils;
+import utils.io.BytesUtils;
 
+import java.math.BigInteger;
 import java.security.SecureRandom;
 
 /**
@@ -39,4 +44,30 @@ public class ChameleonUtils {
         return keyPairGenerator.generateKeyPair();
 
     }
+
+    public static byte[] retrievePublicKey(byte[] rawPrivKeyBytes) {
+        byte[] privK = ByteUtils.subArray(rawPrivKeyBytes,0,32);
+        byte[] privX = ByteUtils.subArray(rawPrivKeyBytes,32,64);
+        ECPoint pubKeyK = DOMAIN_PARAMS.getG().multiply(new BigInteger(1,privK)).normalize();
+        ECPoint pubKeyY = DOMAIN_PARAMS.getG().multiply(new BigInteger(1,privX)).normalize();
+        byte[] pubKeyBytesK = pubKeyK.getEncoded(false);
+        byte[] pubKeyBytesY = pubKeyY.getEncoded(false);
+        return BytesUtils.concat(pubKeyBytesK,pubKeyBytesY);
+    }
+
+    public static byte[] sign(byte[] data,BigInteger rho,byte[] publicKey){
+        byte[] K = ByteUtils.subArray(publicKey,0,65);
+        byte[] X = ByteUtils.subArray(publicKey,65,130);
+        ECPoint pointK = DOMAIN_PARAMS.getCurve().decodePoint(K);
+        ECPoint pointX = DOMAIN_PARAMS.getCurve().decodePoint(X);
+
+        ECPoint mp = DOMAIN_PARAMS.getG().multiply(new BigInteger(1,SM3NewUtils.hash(BytesUtils.concat(data,K))));
+        ECPoint rY = pointX.multiply(rho);
+        return mp.add(rY).getEncoded(false);
+    }
+
+    public static boolean verify(byte[] data,BigInteger rho,byte[] publicKey,byte[] signature){
+        return BytesUtils.equals(signature,sign(data, rho, publicKey));
+    }
+
 }
