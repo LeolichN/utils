@@ -457,7 +457,14 @@ public class BytesUtils {
 	 * @return 转换后的 int 整数；
 	 */
 	public static int toInt(byte[] bytes) {
-		return toInt(bytes, 0);
+		int length = bytes.length;
+		if(length < 4) {
+			byte[] buffer = new byte[4];
+			System.arraycopy(bytes, 0, buffer, buffer.length - length, length);
+			return toInt(buffer, 0);
+		} else {
+			return toInt(bytes, 0);
+		}
 		// value = (value | (bytes[0] & 0xFF)) << 8;
 		// value = (value | (bytes[1] & 0xFF)) << 8;
 		// value = (value | (bytes[2] & 0xFF)) << 8;
