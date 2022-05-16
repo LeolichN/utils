@@ -9,22 +9,9 @@
     <version>2.2.2.RELEASE</version>
     <dependencies>
         <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bcprov-jdk15on</artifactId>
-            <version>1.69</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.bouncycastle</groupId>
-            <artifactId>bcprov-jdk15on</artifactId>
-            <version>1.69</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.jd.blockchain</groupId>
-            <artifactId>ledger-model</artifactId>
-            <version>1.6.3.RELEASE</version>
-            <scope>compile</scope>
+            <groupId>com.jd.utils</groupId>
+            <artifactId>utils-common</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 
